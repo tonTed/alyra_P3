@@ -137,12 +137,12 @@ client/package.json:
 
 ## TODO:
 
-- [ ]  Setup environnement:
+- [x]  Setup environnement:
     - [x]  Install modules
-    - [ ]  Clean project before starting:
-    - [ ]  Configure `truffle-config.js`
-    - [ ]  Add file voting.sol
-    - [ ]  Add file test_voting.sol
+    - [x]  Clean project before starting:
+    - [x]  Configure `truffle-config.js`
+    - [x]  Add file voting.sol
+    - [x]  Add file test_voting.sol
 
 ## Questions:
 
