@@ -1,0 +1,30 @@
+{
+  "name": "alyra_project3",
+  "version": "1.0.0",
+  "description": "Project 3, of the cursus Alyra Developpement",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tonTed/alyra_P3.git"
+  },
+  "author": "tonted",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tonTed/alyra_P3/issues"
+  },
+  "homepage": "https://github.com/tonTed/alyra_P3#readme",
+  "devDependencies": {
+    "@openzeppelin/contracts": "^4.5.0",
+    "@openzeppelin/test-helpers": "^0.5.15",
+    "chai": "^4.3.6",
+    "eth-gas-reporter": "^0.2.25",
+    "solidity-coverage": "^0.7.20",
+    "truffle": "^5.4.29"
+  }
+}
