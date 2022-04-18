@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import VotingContract from "./contracts/Voting.json";
-import getWeb3 from "./getWeb3";
+import VotingContract from "../contracts/Voting.json";
+import getWeb3 from "../utils/getWeb3";
 
 import "./App.css";
 
@@ -8,12 +8,6 @@ class App extends Component {
   state = { web3: null, accounts: null, contract: null };
 
   componentDidMount = async () => {
-
-    //t: Change state on change account in metamask
-    window.ethereum.on('accountsChanged', async () =>{
-      const accounts = await this.state.web3.eth.getAccounts();
-      this.setState({accounts});
-    });
 
     try {
       // Get network provider and web3 instance.
@@ -32,7 +26,7 @@ class App extends Component {
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance }, this.runExample);
+      this.setState({ web3, accounts, contract: instance });
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -42,17 +36,13 @@ class App extends Component {
     }
   };
 
-  runExample = async () => {
-    const { accounts, contract} = this.state;
-    
-  // Stores a given value, 5 by default.
-  // await contract.methods.set(5).send({ from: accounts[0] });
-  // Get the value from the contract to prove it worked.
-  // const response = await contract.methods.get().call();
-
-  // Update state with the result.
-  // this.setState({ storageValue: response });
-  };
+  componentDidUpdate = async () => {
+    //t: Change state on change account in metamask
+    window.ethereum.on('accountsChanged', async () =>{
+      const accounts = await this.state.web3.eth.getAccounts();
+      this.setState({accounts});
+    });
+  }
 
   render() {
     if (!this.state.web3) {
