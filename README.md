@@ -51,6 +51,9 @@
 - The Heroku Link
 - The Github Pages link
 
+## Helpers Projects:
+- [Figma design](https://www.figma.com/file/iK5veLmSVYrPLMn5Mq21GK/alyra-P3?node-id=0%3A1)
+
 ## Getting Started:
 
 ### **Set node version:**
@@ -143,6 +146,15 @@ client/package.json:
     - [x]  Configure `truffle-config.js`
     - [x]  Add file voting.sol
     - [x]  Add file test_voting.sol
+
+- [ ] voting.sol
+	- [ ] natspec comments
+	- [ ] look security exploit
+
+- [ ] front-end
+	- [ ] [Design in figma](https://www.figma.com/file/iK5veLmSVYrPLMn5Mq21GK/alyra-P3?node-id=0%3A1)
+	- [ ] structure of componnents
+
 
 ## Questions:
 
