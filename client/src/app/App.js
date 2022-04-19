@@ -3,9 +3,17 @@ import VotingContract from "../contracts/Voting.json";
 import getWeb3 from "../utils/getWeb3";
 
 import "./App.css";
+import "../components/header"
+import Header from "../components/header";
 
 class App extends Component {
-  state = { web3: null, accounts: null, contract: null };
+  state = {
+    web3: null, 
+    accounts: null, 
+    contract: null,
+    owner: null,
+    status: null
+  }
 
   componentDidMount = async () => {
 
@@ -23,10 +31,16 @@ class App extends Component {
         VotingContract.abi,
         deployedNetwork && deployedNetwork.address,
       );
+      
+      //t: Get the owner of the contract
+      const owner = await instance.methods.owner().call();
+      //t: Get the status of the contract
+      const status = await instance.methods.workflowStatus().call();
+      console.log(status);
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance });
+      this.setState({ web3, accounts, contract: instance, owner, status});
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -50,9 +64,13 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <h1>tonted's voting Project</h1>
-        <div>Your account: {this.state.accounts[0]}</div>
+        <Header 
+          account={this.state.accounts[0]}
+          owner={this.state.owner}
+          status={this.state.status}
+        />
       </div>
+
     );
   }
 }
