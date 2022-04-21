@@ -3,8 +3,9 @@ import VotingContract from "../contracts/Voting.json";
 import getWeb3 from "../utils/getWeb3";
 
 import "./App.css";
-import "../components/header"
-import Header from "../components/header";
+import "../components/Header"
+import Header from "../components/Header";
+import Body from "../components/Body";
 
 class App extends Component {
   state = {
@@ -12,7 +13,16 @@ class App extends Component {
     accounts: null, 
     contract: null,
     owner: null,
-    status: null
+    status: null,
+    admin: null,
+  }
+
+  updateAdmin = (e) => {
+    this.setState({admin: e});
+    console.log("\n\n");
+    console.log("this.state.admin: ", this.state.admin);
+    console.log("-------------- e: ", e);
+    console.log("\n\n");
   }
 
   componentDidMount = async () => {
@@ -36,7 +46,6 @@ class App extends Component {
       const owner = await instance.methods.owner().call();
       //t: Get the status of the contract
       const status = await instance.methods.workflowStatus().call();
-      console.log(status);
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
@@ -68,6 +77,11 @@ class App extends Component {
           account={this.state.accounts[0]}
           owner={this.state.owner}
           status={this.state.status}
+          admin={this.state.admin}
+          funcAdmin={this.updateAdmin}
+          contract={this.state.contract}
+        />
+        <Body
         />
       </div>
 

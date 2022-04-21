@@ -9,37 +9,76 @@ const status = {
 }
 
 class Header extends Component {
-	
-	adminButton = () => {
-		return (
-			<button onClick={() => console.log("CLICK ADMIN")}>Admin</button>
-			)
-		}
-		
-		address = () => {
-			return (
-				<div id="address" style={{ position: "relative"}}>
-					<p style={{float: "left"}}>{this.props.account}</p>
-					{this.props.account === this.props.owner ? this.adminButton() : null}
-				</div>
-		)
+
+	constructor(props){
+		super(props);
+		this.state = {admin: this.props.admin};
+		console.log(this.props.contract); 
 	}
 	
-	status = () => {
-		console.log(status[this.props.status]);
+	switchAdmin = (status) => {
+		this.setState({admin: status});
+		this.props.funcAdmin(status);
+		console.log("switch " + this.state.admin, this.props.admin, status);
+
+	}
+	
+	adminButton = () => {
+		if (this.state.admin)
+			return (
+				<div className="admin-button">
+					<button onClick={() => this.switchAdmin(null)}>Admin Dasboard</button>
+					{/* <button onClick={() => this.switchAdmin(null)}>Admin Dasboard</button> */}
+				</div>
+				);
+		else
+			return (
+				<div className="admin-button">
+					<button onClick={() => this.switchAdmin(1)}>Admin</button>
+				</div>);
+	}
+
+	addressRender = () => {
 		return (
-			<div id="address">
+			<div id="address" style={{ position: "relative"}}>
+				<p style={{float: "left"}}>{this.props.account}</p>
+				{this.props.account === this.props.owner ? this.adminButton() : null}
+			</div>
+		)
+	}
+
+	forwardFlow = async () => {
+		const result1 = await this.props.contract.methods.workflowStatus().call();
+		console.log(result1);
+		const result = await this.props.contract.methods.startProposalsRegistering().send({from: this.props.owner})
+		console.log(result);
+		const result2 = await this.props.contract.methods.workflowStatus().call();
+		console.log(result2);
+	} 
+
+	adminFlow = () => {
+		return (
+			<div className="admin-button">
+				<button onClick={this.forwardFlow}>Next Status</button>
+			</div>
+		);
+
+	}
+	
+	statusRender = () => {
+		return (
+			<div id="status" style={{ position: "relative"}}>
 				<p>{this.props.status} : {status[this.props.status]}</p>
+				{this.props.account && this.props.admin ? this.adminFlow() : null}
 			</div>
 		)
 	}
 	
 	render() {
-		console.log(this.props.owner);
 		return (
 			<div id="header">
-				{this.status()}
-				{this.address()}
+				{this.statusRender()}
+				{this.addressRender()}
 			</div>
 		)
 	}

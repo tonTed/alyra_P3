@@ -32,7 +32,17 @@
 	background-color: #221d23;
 }
 
-button {
+#status {
+	background-color: #221d23;
+}
+
+.admin-button {
+	position: absolute;
+	height: 100%;
+	right: 0;
+}
+
+.admin-button button {
 	border-radius: 20px;
 	border: 0;
 	padding-left: 20px;
