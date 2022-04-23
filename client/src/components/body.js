@@ -3,10 +3,23 @@ import VotingContract from "../contracts/Voting.json";
 
 import "./components.css";
 
+function sleep(milliseconds) {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
+}
+
 class Body extends Component {
 	state = {
 		proposals: [],
 	}
+
+	// onSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log("refresh prevented");
+  // };
 
 	componentDidMount = async () => {
 			this.setState({proposals: await this.getProposals()});
@@ -32,14 +45,24 @@ class Body extends Component {
 		return (<ul>{this.state.proposals.map((e, i) => <li key={i}>${e['desc']}</li>)}</ul>);
 	}
 
+	addProposal = async (e) => {
+		e.preventDefault();
+		this.props.contract.methods.addProposal(this.textInput.value)
+			.send({from: this.props.account})
+			.then(() => {
+				this.setState({proposals: [...this.state.proposals, {'desc': this.textInput.value, 'count': 0}]})
+			})
+	}
+
 	render() {
 		return (
 			<div id="body">
-				<div>
-					<label id="lname">Last name:</label>
-					<input type="text" id="lname" name="lname"/>
-					<input type="submit" value="Submit"/>
-				</div>
+				<div><form onSubmit={this.addProposal}>
+						<label>Proposal:
+							<input type="text" ref={(input) => {this.textInput = input}}/>
+						</label>
+						<input type="submit" value="Submit"/>
+				</form></div>
 				<div>
 					{this.renderProposals()}
 				</div>
