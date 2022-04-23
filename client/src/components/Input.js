@@ -42,11 +42,11 @@ export default class Input extends Component {
 	}
 
 	renderInput = () => {
-		if (this.props.status == 0 && this.props.admin)
+		if (this.props.status == 0 && this.props.adminStatus)
 			return (<div>{this._renderAddVoterInput()}</div>);
-		if (this.props.status == 1 && !this.props.admin)
+		if (this.props.status == 1 && !this.props.adminStatus && this.props.isVoter)
 			return (<div>{this._renderProposalInput()}</div>);
-		if (this.props.status == 3 && !this.props.admin)
+		if (this.props.status == 3 && !this.props.adminStatus && this.props.isVoter)
 			return (<div>{this._renderVoteInput()}</div>);
 		else
 			return (null);

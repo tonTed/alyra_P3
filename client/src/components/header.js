@@ -21,7 +21,7 @@ class Header extends Component {
 	}
 	
 	adminButton = () => {
-		if (this.props.admin)
+		if (this.props.adminStatus)
 			return (
 				<div className="admin-button">
 					<button onClick={() => this.switchAdmin(null)}>Admin Dasboard</button>
@@ -64,12 +64,13 @@ class Header extends Component {
 		return (
 			<div id="status" style={{ position: "relative"}}>
 				<p>{this.props.status} : {status[this.props.status].name}</p>
-				{this.props.account && this.props.admin ? this.renderFlowButton() : null}
+				{this.props.account && this.props.adminStatus ? this.renderFlowButton() : null}
 			</div>
 		)
 	}
 	
 	render() {
+		console.log(this.props.vars);
 		return (
 			<div id="header">
 				{this.renderStatus()}

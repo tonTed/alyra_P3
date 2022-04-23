@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import "./components.css";
 import Input from "./Input.js"
+import Message from "./Message";
 
 class Body extends Component {
 	state = {
@@ -26,7 +27,7 @@ class Body extends Component {
 	}
 
 	componentDidMount = async () => {
-			this.setState({proposals: await this._getProposals()});
+			// this.setState({proposals: await this._getProposals()});
 	}
 
 	updateInput = (input) => {
@@ -60,24 +61,36 @@ class Body extends Component {
 	}
 
 	renderProposals = () => {
-		return (
-		<div>
-			<ul>{this.state.proposals.map((e, i) => 
-				<li key={i}>{e['desc']}</li>)}</ul>
-		</div>
-	)}
+		if (this.status == 1 || this.status == 2){
+			return (
+			<div>
+				<ul>{this.state.proposals.map((e, i) => 
+					<li key={i}>{e['desc']}</li>)}</ul>
+			</div>
+		)}
+		return(null);
+	}
 
 	render() {
 		return (
 			<div id="body">
+				<Message
+				status={this.props.status}
+				account={this.props.account}
+				contract={this.props.contract}
+				isVoter={this.props.isVoter}
+				adminStatus={this.props.adminStatus}
+				/>
 				<Input
 				status={this.props.status}
-				addVoter={this.addVoter}
+				contract={this.props.contract}
+				isVoter={this.props.isVoter}
+				adminStatus={this.props.adminStatus}
+				proposals={this.state.proposals}
 				addProposal={this.addProposal}
+				addVoter={this.addVoter}
 				voteProposal={this.voteProposal}
 				updateInput={this.updateInput}
-				admin={this.props.admin}
-				proposals={this.state.proposals}
 				/>
 				<div>{this.renderProposals()}</div>
 			</div>

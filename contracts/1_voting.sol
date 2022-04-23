@@ -161,44 +161,4 @@ contract Voting is Ownable {
        workflowStatus = WorkflowStatus.VotesTallied;
        emit WorkflowStatusChange(WorkflowStatus.VotingSessionEnded, WorkflowStatus.VotesTallied);
     }
-
-    function resetWorklow() external onlyOwner {
-        workflowStatus = WorkflowStatus.RegisteringVoters;
-    }
-
-
-    constructor() {
-        voters[address(0xBF2C49df4a77f583C06A190ff71dD153FD84000a)].isRegistered = true;
-        voters[address(0x92218796747cb1B8490ef3275d81F028291F3E7C)].isRegistered = true;
-        voters[address(0x709c337524C506cf9584029e54c151Efd6D2D436)].isRegistered = true;
-        voters[address(0x81FF5c6A3eE359ecBc7747740A4d16442180f836)].isRegistered = true;
-           
-        proposalsArray.push(Proposal("Proposal 0", 0));
-        proposalsArray.push(Proposal("Proposal 1", 0));
-        proposalsArray.push(Proposal("Proposal 2", 0));
-        proposalsArray.push(Proposal("Proposal 3", 0));
-        proposalsArray.push(Proposal("Proposal 4", 0));
-        proposalsArray.push(Proposal("Proposal 5", 0));
-        proposalsArray.push(Proposal("Proposal 6", 0));
-        proposalsArray.push(Proposal("Proposal 7", 0));
-    }
-
-
-    function resetFlow() external onlyOwner {
-        voters[0xBF2C49df4a77f583C06A190ff71dD153FD84000a].isRegistered = true;
-        voters[0x92218796747cb1B8490ef3275d81F028291F3E7C].isRegistered = true;
-        voters[0x709c337524C506cf9584029e54c151Efd6D2D436].isRegistered = true;
-        voters[0x81FF5c6A3eE359ecBc7747740A4d16442180f836].isRegistered = true;
-
-        proposalsArray[0] = Proposal("Proposal 0", 0);
-        proposalsArray[1] = Proposal("Proposal 1", 0);
-        proposalsArray[2] = Proposal("Proposal 2", 0);
-        proposalsArray[3] = Proposal("Proposal 3", 0);
-        proposalsArray[4] = Proposal("Proposal 4", 0);
-        proposalsArray[5] = Proposal("Proposal 5", 0);
-        proposalsArray[6] = Proposal("Proposal 6", 0);
-        proposalsArray[7] = Proposal("Proposal 7", 0);
-
-        workflowStatus = WorkflowStatus.RegisteringVoters;
-    }
 }
