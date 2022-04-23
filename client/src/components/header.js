@@ -9,6 +9,7 @@ const status = [
 	{name: "Proposals Registering Ended", func: `this.props.contract.methods.startVotingSession()`},
 	{name: "Voting Session", 							func: `this.props.contract.methods.endVotingSession()`},
 	{name: "Voting Session Ended", 				func: `this.props.contract.methods.tallyVotes()`},
+	{name: "Votes Tallied", 							func: null},
 ]
 
 class Header extends Component {

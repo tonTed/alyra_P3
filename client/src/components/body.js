@@ -54,8 +54,17 @@ class Body extends Component {
 		this.props.contract.methods.addProposal(this.textInput.value)
 			.send({from: this.props.account})
 			.then(() => {
-				this.setState({proposals: [...this.state.proposals, {'desc': this.textInput.value, 'count': 0}]})
+				this.setState({proposals: [...this.state.proposals, 
+					{'desc': this.textInput.value, 'count': 0}]})
 			})
+		this.textInput = "";
+	}
+
+	voteProposal = async (e) => {
+		e.preventDefault();
+		console.log(this.textInput.value);
+		this.props.contract.methods.setVote((this.textInput.value))
+			.send({from: this.props.account})
 		this.textInput = "";
 	}
 
@@ -66,8 +75,10 @@ class Body extends Component {
 				status={this.props.status}
 				addVoter={this.addVoter}
 				addProposal={this.addProposal}
+				voteProposal={this.voteProposal}
 				updateInput={this.updateInput}
 				admin={this.props.admin}
+				proposals={this.state.proposals}
 				/>
 				<div>{this.renderProposals()}</div>
 			</div>
