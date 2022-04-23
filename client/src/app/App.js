@@ -82,9 +82,11 @@ class App extends Component {
           funcStatus={this.updateStatus}
           />
         <Body
+          admin={this.state.admin}
           account={this.state.accounts[0]}
           contract={this.state.contract}
           status={this.state.status}
+          owner={this.state.owner}
         />
       </div>
 

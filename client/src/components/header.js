@@ -16,7 +16,6 @@ class Header extends Component {
 	constructor(props){
 		super(props);
 		this.state = {admin: this.props.admin};
-		console.log(this.props.contract); 
 	}
 	
 	switchAdmin = (status) => {
