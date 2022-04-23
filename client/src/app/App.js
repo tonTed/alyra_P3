@@ -20,6 +20,7 @@ class App extends Component {
   updateAdmin = (e) => {
     this.setState({admin: e});
   }
+
   updateStatus = (e) => {
     this.setState({status: e})
   }
@@ -77,8 +78,8 @@ class App extends Component {
           owner={this.state.owner}
           status={this.state.status}
           admin={this.state.admin}
-          funcAdmin={this.updateAdmin}
           contract={this.state.contract}
+          funcAdmin={this.updateAdmin}
           funcStatus={this.updateStatus}
           />
         <Body
@@ -86,7 +87,6 @@ class App extends Component {
           account={this.state.accounts[0]}
           contract={this.state.contract}
           status={this.state.status}
-          owner={this.state.owner}
         />
       </div>
 

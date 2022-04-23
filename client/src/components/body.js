@@ -8,15 +8,7 @@ class Body extends Component {
 		proposals: [],
 	}
 
-	componentDidMount = async () => {
-			this.setState({proposals: await this.getProposals()});
-	}
-
-	updateInput = (input) => {
-		this.textInput = input;
-	}
-
-	getProposals = async () => {
+	_getProposals = async () => {
 		let array = [];
 		let ret = [];
 		let tmp;
@@ -28,24 +20,23 @@ class Body extends Component {
 				break ;
 			}
 		}
-		array.forEach((e) => ret.push({'desc': e['description'], 'count': e['voteCount']}))
+		array.forEach((e) => {
+			ret.push({'desc': e['description'], 'count': e['voteCount']})})
 		return (ret);
 	}
 
-	renderProposals = () => {
-		return (
-		<div>
-			<ul>{this.state.proposals.map((e, i) => <li key={i}>${e['desc']}</li>)}</ul>
-		</div>
-		)}
+	componentDidMount = async () => {
+			this.setState({proposals: await this._getProposals()});
+	}
+
+	updateInput = (input) => {
+		this.textInput = input;
+	}
 
 	addVoter = async (e) => {
 		e.preventDefault();
 		this.props.contract.methods.addVoter(this.textInput.value)
 			.send({from: this.props.account})
-			// .then(() => {
-			// 	this.setState({proposals: [...this.state.proposals, {'desc': this.textInput.value, 'count': 0}]})
-			// })
 		this.textInput = "";
 	}
 
@@ -67,6 +58,14 @@ class Body extends Component {
 			.send({from: this.props.account})
 		this.textInput = "";
 	}
+
+	renderProposals = () => {
+		return (
+		<div>
+			<ul>{this.state.proposals.map((e, i) => 
+				<li key={i}>{e['desc']}</li>)}</ul>
+		</div>
+	)}
 
 	render() {
 		return (

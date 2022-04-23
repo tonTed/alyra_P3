@@ -1,10 +1,6 @@
 import React, { Component } from "react";
-import VotingContract from "../contracts/Voting.json";
 
 import "./components.css";
-import Utils from "./test";
-
-const utils = new Utils()
 
 export default class Input extends Component {
 

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import VotingContract from "../contracts/Voting.json";
 
 import "./components.css";
+import Utils from "./Utils";
+
+const utils = new Utils()
 
 const status = [
 	{name: "Registration Voters",					func: `this.props.contract.methods.startProposalsRegistering()`},
@@ -13,19 +15,13 @@ const status = [
 ]
 
 class Header extends Component {
-
-	constructor(props){
-		super(props);
-		this.state = {admin: this.props.admin};
-	}
 	
 	switchAdmin = (status) => {
-		this.setState({admin: status});
 		this.props.funcAdmin(status);
 	}
 	
 	adminButton = () => {
-		if (this.state.admin)
+		if (this.props.admin)
 			return (
 				<div className="admin-button">
 					<button onClick={() => this.switchAdmin(null)}>Admin Dasboard</button>
@@ -38,15 +34,6 @@ class Header extends Component {
 				</div>);
 	}
 
-	addressRender = () => {
-		return (
-			<div id="address" style={{ position: "relative"}}>
-				<p style={{float: "left"}}>{this.props.account}</p>
-				{this.props.account === this.props.owner ? this.adminButton() : null}
-			</div>
-		)
-	}
-
 	forwardFlow = () => {
 		eval(status[this.props.status].func)
 			.send({from: this.props.account})
@@ -55,7 +42,16 @@ class Header extends Component {
 				});
 	} 
 
-	adminFlow = () => {
+	renderAddress = () => {
+		return (
+			<div id="address" style={{ position: "relative"}}>
+				<p style={{float: "left"}}>{this.props.account}</p>
+				{utils.isOwner(this.props.account, this.props.owner) ? this.adminButton() : null}
+			</div>
+		)
+	}
+
+	renderFlowButton = () => {
 		return (
 			<div className="admin-button">
 				<button onClick={this.forwardFlow}>Next Status</button>
@@ -64,11 +60,11 @@ class Header extends Component {
 
 	}
 	
-	statusRender = () => {
+	renderStatus = () => {
 		return (
 			<div id="status" style={{ position: "relative"}}>
 				<p>{this.props.status} : {status[this.props.status].name}</p>
-				{this.props.account && this.props.admin ? this.adminFlow() : null}
+				{this.props.account && this.props.admin ? this.renderFlowButton() : null}
 			</div>
 		)
 	}
@@ -76,8 +72,8 @@ class Header extends Component {
 	render() {
 		return (
 			<div id="header">
-				{this.statusRender()}
-				{this.addressRender()}
+				{this.renderStatus()}
+				{this.renderAddress()}
 			</div>
 		)
 	}
