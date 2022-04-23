@@ -3,10 +3,13 @@ import VotingContract from "../contracts/Voting.json";
 
 import "./components.css";
 
-const status = {
-	0: "Registration Voters",
-	1: "Proposals session"
-}
+const status = [
+	{name: "Registration Voters",					func: `this.props.contract.methods.startProposalsRegistering()`},
+	{name: "Proposals Registering", 			func: `this.props.contract.methods.endProposalsRegistering()`},
+	{name: "Proposals Registering Ended", func: `this.props.contract.methods.startVotingSession()`},
+	{name: "Voting Session", 							func: `this.props.contract.methods.endVotingSession()`},
+	{name: "Voting Session Ended", 				func: `this.props.contract.methods.tallyVotes()`},
+]
 
 class Header extends Component {
 
@@ -19,8 +22,6 @@ class Header extends Component {
 	switchAdmin = (status) => {
 		this.setState({admin: status});
 		this.props.funcAdmin(status);
-		console.log("switch " + this.state.admin, this.props.admin, status);
-
 	}
 	
 	adminButton = () => {
@@ -28,7 +29,6 @@ class Header extends Component {
 			return (
 				<div className="admin-button">
 					<button onClick={() => this.switchAdmin(null)}>Admin Dasboard</button>
-					{/* <button onClick={() => this.switchAdmin(null)}>Admin Dasboard</button> */}
 				</div>
 				);
 		else
@@ -47,13 +47,12 @@ class Header extends Component {
 		)
 	}
 
-	forwardFlow = async () => {
-		const result1 = await this.props.contract.methods.workflowStatus().call();
-		console.log(result1);
-		const result = await this.props.contract.methods.startProposalsRegistering().send({from: this.props.owner})
-		console.log(result);
-		const result2 = await this.props.contract.methods.workflowStatus().call();
-		console.log(result2);
+	forwardFlow = () => {
+		eval(status[this.props.status].func)
+			.send({from: this.props.account})
+			.then((res) => {
+					this.props.funcStatus(res.events.WorkflowStatusChange.returnValues.newStatus);
+				});
 	} 
 
 	adminFlow = () => {
@@ -68,7 +67,7 @@ class Header extends Component {
 	statusRender = () => {
 		return (
 			<div id="status" style={{ position: "relative"}}>
-				<p>{this.props.status} : {status[this.props.status]}</p>
+				<p>{this.props.status} : {status[this.props.status].name}</p>
 				{this.props.account && this.props.admin ? this.adminFlow() : null}
 			</div>
 		)

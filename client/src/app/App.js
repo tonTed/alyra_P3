@@ -19,10 +19,9 @@ class App extends Component {
 
   updateAdmin = (e) => {
     this.setState({admin: e});
-    console.log("\n\n");
-    console.log("this.state.admin: ", this.state.admin);
-    console.log("-------------- e: ", e);
-    console.log("\n\n");
+  }
+  updateStatus = (e) => {
+    this.setState({status: e})
   }
 
   componentDidMount = async () => {
@@ -80,8 +79,12 @@ class App extends Component {
           admin={this.state.admin}
           funcAdmin={this.updateAdmin}
           contract={this.state.contract}
-        />
+          funcStatus={this.updateStatus}
+          />
         <Body
+          account={this.state.accounts[0]}
+          contract={this.state.contract}
+          status={this.state.status}
         />
       </div>
 

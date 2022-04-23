@@ -55,3 +55,15 @@
 	color: #221d23;
 	cursor: pointer;
 }
+
+#body div{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 20px 20px 0 20px;
+}
+
+#body div {
+	display: flex;
+	flex-direction: row;
+}
