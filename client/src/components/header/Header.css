@@ -1,0 +1,38 @@
+.Header {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-items: center;
+	background-color: tomato;
+	height: 100px;
+	border: solid;
+	padding: 20px 5vw 0 5vh;
+}
+
+.Header div {
+
+	display: flex;
+	align-items: center;
+	height: 50%;
+	border-radius: 20px;
+	background-color: brown;
+	border: solid;
+	padding: 0 10px 0 10px;
+	overflow: hidden;
+}
+
+.Workflow {
+	max-width: 35vh;
+	min-width: 25vh;
+}
+
+.Address {
+	margin-left: auto;
+	max-width: 45vw;
+}
+
+p {
+	width: 100%;
+	padding: 0 1vw 0 1vw;
+	text-align: center;
+}

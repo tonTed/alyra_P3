@@ -1,14 +1,24 @@
-import React, { Component, useContext } from "react";
+import React, { Component } from "react";
 import VotingContract from "../contracts/Voting.json";
 import getWeb3 from "../utils/getWeb3";
 
 import "./App.css";
 
+import Header from "../components/header/Header";
+
 class App extends Component {
   state = {
     web3: null, 
     accounts: null, 
-    contract: null
+    contract: null,
+    status: {
+      value: null,
+      func: null
+    } 
+  }
+
+  updateStatus = (value) => {
+    this.setState({status:{value}})
   }
 
   componentDidMount = async () => {
@@ -27,9 +37,12 @@ class App extends Component {
         deployedNetwork && deployedNetwork.address,
       );
 
+      //t: Set status Worklow
+      const status = await instance.methods.workflowStatus().call();
+
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance});
+      this.setState({ web3, accounts, contract: instance, status:{value: status, func: this.updateStatus}});
 
     } catch (error) {
       // Catch any errors for any of the above operations.
@@ -47,7 +60,11 @@ class App extends Component {
     }
     return (
       <div className="App">
-        HELLO !!!
+        <Header
+          account={this.state.accounts[0]}
+          contract={this.state.contract}
+          status={this.state.status}
+        /> 
       </div>
 
     );
