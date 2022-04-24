@@ -10,7 +10,7 @@ const status = [
 	{name: "Votes Tallied", 							func: null},
 ]
 
-function Worklow(props) {
+function Workflow(props) {
 	const _status = props.status.value;
 		return (
 			<div className="Workflow">
@@ -19,10 +19,20 @@ function Worklow(props) {
 		)
 }
 
+function AdminButton(props) {
+	return (
+		<button onClick={props.admin.func}>
+			{props.admin.value ? 'Admin Dashbord' : 'Admin'}
+			</button>
+	)
+}
+
 function Address(props) {
+	// console.log(props.accounts.isOwner);
 	return (
 		<div className="Address">
 			<p>{props.accounts.connected}</p>
+			{props.accounts.isOwner ? <AdminButton admin={props.admin}/> : null}
 		</div>
 	)
 }
@@ -30,11 +40,12 @@ function Address(props) {
 function Header(props) {
 	return (
 		<div className="Header">
-			<Worklow
+			<Workflow
 				status={props.status}
 			/>
 			<Address
 				accounts={props.accounts}
+				admin={props.admin}
 			/>
 		</div>
 		)

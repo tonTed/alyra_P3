@@ -9,18 +9,21 @@ import Header from "../components/header/Header";
 class App extends Component {
   state = {
     web3: null, 
-    accounts: { connected: null, owner: null,}, 
+    accounts: { connected: null, owner: null, isOwner: null}, 
     contract: null,
     status: { value: null, func: null },
-    admin:{ value: null, func: null } 
+    admin: { value: null, func: null } 
   }
 
   updateStatus = (value) => {
     this.setState({status:{value}})
   }
 
-  updateAdmin = (value) => {
-    this.setState({admin:{value}})
+  updateAdmin = () => {
+    this.setState({admin: 
+      { value: !this.state.admin.value, func: this.updateAdmin}
+    });
+    console.debug(`Admin Dashbord: ${!this.state.admin.value}`);
   }
 
   componentDidMount = async () => {
@@ -49,10 +52,10 @@ class App extends Component {
       // example of interacting with the contract's methods.
       this.setState({ 
         web3,
-        accounts: {connected: accounts[0], owner}, 
+        accounts: {connected: accounts[0], owner, isOwner: accounts[0] == owner}, 
         contract: instance, 
         status:{value: status, func: this.updateStatus},
-        admin:{value: accounts[0] == owner, func: this.updateAdmin}
+        admin:{value: false, func: this.updateAdmin}
       });
 
     } catch (error) {
@@ -64,6 +67,15 @@ class App extends Component {
     }
   };
 
+  componentDidUpdate = async () => {
+    window.ethereum.on('accountsChanged', async () =>{
+      const accounts = await this.state.web3.eth.getAccounts();
+      this.setState({accounts: { 
+        connected: accounts[0],
+        owner: this.state.accounts.owner,
+        isOwner: accounts == this.state.accounts.owner}});
+    })
+  }
 
   render() {
     if (!this.state.web3) {
