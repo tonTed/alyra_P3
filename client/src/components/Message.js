@@ -14,8 +14,8 @@ export default function Message(props){
 	if (props.adminStatus)
 		return (null);
 	if (props.status == 0)
-		return(<div>PROPOSAL SESSION NOT STARTING YET</div>)
-	if (props.status == 1 && !props.isVoter)
-		return(<div>YOU ARE NOT A VOTER</div>)
-	return (null);
+		return(<div>PROPOSAL SESSION NOT STARTED YET</div>)
+	if (props.status == 2 && props.isVoter)
+		return(<div>VOTING SESSION NOT STARTED YET</div>)
+	return(<div>YOU ARE NOT A VOTER</div>)
 }

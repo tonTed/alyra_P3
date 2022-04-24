@@ -1,20 +1,11 @@
-import React, { Component } from "react";
+import React, { Component, useContext } from "react";
 import VotingContract from "../contracts/Voting.json";
 import getWeb3 from "../utils/getWeb3";
 
 import "./App.css";
-import "../components/Header"
 import Header from "../components/Header";
 import Body from "../components/Body";
-
-const vars = {
-  contract: null,
-  owner: null,
-  status: null,
-  adminStatus: null,
-  isVoter: false,
-  voters: null,
-}
+import { VarsContext } from "../context/VarsContext";
 
 class App extends Component {
   state = {
@@ -26,7 +17,6 @@ class App extends Component {
     adminStatus: null,
     isVoter: false,
     voters: null,
-    vars: vars
   }
 
   updateAdmin = (e) => {
@@ -52,7 +42,6 @@ class App extends Component {
   }
 
   componentDidMount = async () => {
-
     try {
       // Get network provider and web3 instance.
       const web3 = await getWeb3();
@@ -76,8 +65,6 @@ class App extends Component {
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
       this.setState({ web3, accounts, contract: instance, owner, status});
-      this.setState({vars: {owner, contract: instance, status, owner}})
-      console.log("VARS", this.state.vars);
       this.isVoter();
 
     } catch (error) {
@@ -113,7 +100,6 @@ class App extends Component {
           contract={this.state.contract}
           funcAdmin={this.updateAdmin}
           funcStatus={this.updateStatus}
-          vars={this.state.vars}
           />
         <Body
           isVoter={this.state.isVoter}

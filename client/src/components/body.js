@@ -10,6 +10,7 @@ class Body extends Component {
 	}
 
 	_getProposals = async () => {
+		// let propsalsEvents = await this.props.contract
 		let array = [];
 		let ret = [];
 		let tmp;
@@ -27,7 +28,7 @@ class Body extends Component {
 	}
 
 	componentDidMount = async () => {
-			// this.setState({proposals: await this._getProposals()});
+			this.setState({proposals: await this._getProposals()});
 	}
 
 	updateInput = (input) => {
@@ -53,7 +54,7 @@ class Body extends Component {
 	}
 
 	voteProposal = async (e) => {
-		e.preventDefault();
+		// e.preventDefault();
 		console.log(this.textInput.value);
 		this.props.contract.methods.setVote((this.textInput.value))
 			.send({from: this.props.account})
@@ -61,11 +62,11 @@ class Body extends Component {
 	}
 
 	renderProposals = () => {
-		if (this.status == 1 || this.status == 2){
+		if (this.props.status == 3 && this.props.isVoter){
 			return (
 			<div>
 				<ul>{this.state.proposals.map((e, i) => 
-					<li key={i}>{e['desc']}</li>)}</ul>
+					<li style={{textAlign: "left"}} key={i}>{`${i} : ${e['desc']}`}</li>)}</ul>
 			</div>
 		)}
 		return(null);

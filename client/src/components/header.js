@@ -70,7 +70,6 @@ class Header extends Component {
 	}
 	
 	render() {
-		console.log(this.props.vars);
 		return (
 			<div id="header">
 				{this.renderStatus()}
