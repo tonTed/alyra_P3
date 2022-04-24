@@ -131,9 +131,11 @@ class App extends Component {
           status={this.state.status}
           admin={this.state.admin}
         />
+        {!this.state.admin.value ? 
         <Message
           accounts={this.state.accounts}
-        />
+          status={this.state.status.value}
+        />: null}
         <Input
           addVoter={this.addVoter}
           admin={this.state.admin}
