@@ -40,11 +40,11 @@ p {
 	text-align: center;
 }
 
-.Address button {
+button {
 	position: absolute;
 	border-radius: 20px;
 	right: 0;
 	height: 50px;
-	width: 30%;
+	width: 40%;
 	cursor: pointer;
 }

@@ -17,6 +17,7 @@ class App extends Component {
 
   updateStatus = (value) => {
     this.setState({status:{value}})
+    console.debug('Status Updated')
   }
 
   updateAdmin = () => {
