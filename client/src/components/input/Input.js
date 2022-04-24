@@ -22,9 +22,9 @@ function AddVoterInput(props) {
 function Input(props) {
 	return (
 		<div className='Input'>
-			<AddVoterInput
+			{props.admin.value ? <AddVoterInput
 				addVoter={props.addVoter}
-			/>
+			/> : null}
 		</div>
 	)
 }

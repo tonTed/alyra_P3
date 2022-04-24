@@ -30,10 +30,22 @@ class App extends Component {
     console.debug(`Admin Dashbord: ${!this.state.admin.value}`);
   }
 
+  updateVoters = async () => {
+    const events = this.state.contract
+      .getPastEvents('VoterRegistered', { fromBlock: 0, toBlock: 'latest'})
+    
+    console.log(events);
+  }
+
   addVoter = async (address) => {
     await this.state.contract.methods.addVoter(address)
       .send({from: this.state.accounts.connected})
-      .then((res) => console.log(res));
+      .then((res) =>{
+        console.log(res)
+        const voters = [...this.state.voters, 
+          res.events.VoterRegistered.returnValues.voterAddress];
+        console.log(voters);
+      });
   }
 
   componentDidMount = async () => {
@@ -58,6 +70,12 @@ class App extends Component {
       //t: Get owner
       const owner = await instance.methods.owner().call();
 
+      //t: Get voters
+      const voters = await instance
+        .getPastEvents('VoterRegistered', { fromBlock: 0, toBlock: 'latest'})
+      
+      const arrayVoters = voters.map(element => element.returnValues.voterAddress);
+
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
       this.setState({ 
@@ -65,7 +83,8 @@ class App extends Component {
         accounts: {connected: accounts[0], owner, isOwner: accounts[0] == owner}, 
         contract: instance, 
         status:{value: status, func: this.updateStatus},
-        admin:{value: false, func: this.updateAdmin}
+        admin:{value: false, func: this.updateAdmin},
+        voters: arrayVoters
       });
 
     } catch (error) {
@@ -80,10 +99,13 @@ class App extends Component {
   componentDidUpdate = async () => {
     window.ethereum.on('accountsChanged', async () =>{
       const accounts = await this.state.web3.eth.getAccounts();
-      this.setState({accounts: { 
-        connected: accounts[0],
-        owner: this.state.accounts.owner,
-        isOwner: accounts == this.state.accounts.owner}});
+      this.setState({
+        accounts: { 
+          connected: accounts[0],
+          owner: this.state.accounts.owner,
+          isOwner: accounts == this.state.accounts.owner},
+        admin: {value: false, func: this.updateAdmin}
+      });
     })
   }
 
@@ -101,6 +123,7 @@ class App extends Component {
         />
         <Input
           addVoter={this.addVoter}
+          admin={this.state.admin}
         />
       </div>
 
