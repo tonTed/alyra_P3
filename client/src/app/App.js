@@ -3,42 +3,12 @@ import VotingContract from "../contracts/Voting.json";
 import getWeb3 from "../utils/getWeb3";
 
 import "./App.css";
-import Header from "../components/Header";
-import Body from "../components/Body";
-import { VarsContext } from "../context/VarsContext";
 
 class App extends Component {
   state = {
     web3: null, 
     accounts: null, 
-    contract: null,
-    owner: null,
-    status: null,
-    adminStatus: null,
-    isVoter: false,
-    voters: null,
-  }
-
-  updateAdmin = (e) => {
-    this.setState({adminStatus: e});
-  }
-
-  updateStatus = (e) => {
-    this.setState({status: e})
-  }
-
-  isVoter = async () => {
-    const eventsVoter = await this.state.contract
-    .getPastEvents('VoterRegistered', {fromBlock: 0, toBlock: 'latest'})
-    let voters = eventsVoter.map((event) => event['returnValues']['voterAddress'])
-    this.setState({voters});
-    this.state.voters.forEach(element => {
-      if(element == this.state.accounts[0]){
-        this.setState({isVoter: true})
-        return ;
-      }
-      this.setState({isVoter: false})
-    });
+    contract: null
   }
 
   componentDidMount = async () => {
@@ -56,16 +26,10 @@ class App extends Component {
         VotingContract.abi,
         deployedNetwork && deployedNetwork.address,
       );
-      
-      //t: Get the owner of the contract
-      const owner = await instance.methods.owner().call();
-      //t: Get the status of the contract
-      const status = await instance.methods.workflowStatus().call();
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance, owner, status});
-      this.isVoter();
+      this.setState({ web3, accounts, contract: instance});
 
     } catch (error) {
       // Catch any errors for any of the above operations.
@@ -76,14 +40,6 @@ class App extends Component {
     }
   };
 
-  componentDidUpdate = async () => {
-    //t: Change state on change account in metamask
-    window.ethereum.on('accountsChanged', async () =>{
-      const accounts = await this.state.web3.eth.getAccounts();
-      this.setState({accounts});
-      this.isVoter();
-    });
-  }
 
   render() {
     if (!this.state.web3) {
@@ -91,23 +47,7 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <Header 
-          account={this.state.accounts[0]}
-          owner={this.state.owner}
-          isVoter={this.state.isVoter}
-          status={this.state.status}
-          adminStatus={this.state.adminStatus}
-          contract={this.state.contract}
-          funcAdmin={this.updateAdmin}
-          funcStatus={this.updateStatus}
-          />
-        <Body
-          isVoter={this.state.isVoter}
-          adminStatus={this.state.adminStatus}
-          account={this.state.accounts[0]}
-          contract={this.state.contract}
-          status={this.state.status}
-        />
+        HELLO !!!
       </div>
 
     );
