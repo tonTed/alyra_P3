@@ -5,6 +5,7 @@ import getWeb3 from "../utils/getWeb3";
 import "./App.css";
 
 import Header from "../components/header/Header";
+import Input from "../components/input/Input";
 
 class App extends Component {
   state = {
@@ -12,7 +13,9 @@ class App extends Component {
     accounts: { connected: null, owner: null, isOwner: null}, 
     contract: null,
     status: { value: null, func: null },
-    admin: { value: null, func: null } 
+    admin: { value: null, func: null },
+    voters: [],
+    proposals: []
   }
 
   updateStatus = (value) => {
@@ -25,6 +28,12 @@ class App extends Component {
       { value: !this.state.admin.value, func: this.updateAdmin}
     });
     console.debug(`Admin Dashbord: ${!this.state.admin.value}`);
+  }
+
+  addVoter = async (address) => {
+    await this.state.contract.methods.addVoter(address)
+      .send({from: this.state.accounts.connected})
+      .then((res) => console.log(res));
   }
 
   componentDidMount = async () => {
@@ -89,7 +98,10 @@ class App extends Component {
           contract={this.state.contract}
           status={this.state.status}
           admin={this.state.admin}
-        /> 
+        />
+        <Input
+          addVoter={this.addVoter}
+        />
       </div>
 
     );

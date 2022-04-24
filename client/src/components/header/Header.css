@@ -1,25 +1,6 @@
 .Header {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	align-items: center;
-	background-color: tomato;
-	height: 100px;
-	border: solid;
-	padding: 20px 5vw 0 5vh;
-}
-
-.Header div {
-
-	display: flex;
-	align-items: center;
-	height: 50px;
-	border-radius: 20px;
-	background-color: brown;
-	border: solid;
-	overflow: hidden;
-	position: relative;
-	/* padding: 0 10px 0 10px; */
+	height: 80px;
+	padding: 10px 5vw 10px 5vh;
 }
 
 .Workflow {
@@ -34,17 +15,3 @@
 	max-width: 45vw;
 }
 
-p {
-	width: 100%;
-	padding: 0 1vw 0 1vw;
-	text-align: center;
-}
-
-button {
-	position: absolute;
-	border-radius: 20px;
-	right: 0;
-	height: 50px;
-	width: 40%;
-	cursor: pointer;
-}

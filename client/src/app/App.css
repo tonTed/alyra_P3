@@ -1,3 +1,18 @@
+p {
+	width: 100%;
+	padding: 0 1vw 0 1vw;
+	text-align: center;
+}
+
+button {
+	position: absolute;
+	border-radius: 20px;
+	right: 0;
+	height: 40px;
+	width: 40%;
+	cursor: pointer;
+}
+
 .App {
   min-height: 100vh;
   display: flex;
@@ -6,5 +21,26 @@
   justify-content: flex-start;
   font-size: calc(10px + 1vmin);
   color: white;
+}
+
+.App div {
+  display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-items: center;
+	background-color: tomato;
+	border: solid;
+}
+
+.App div div{
+  display: flex;
+	align-items: center;
+	height: 40px;
+	border-radius: 20px;
+	background-color: brown;
+  border: solid;
+	overflow: hidden;
+	position: relative;
+	border: solid;
 }
 
