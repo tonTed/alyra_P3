@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Proposals from '../proposals/Proposals';
 import './Input.css'
 
 function AddVoterInput(props) {
@@ -19,14 +20,41 @@ function AddVoterInput(props) {
 	)
 }
 
-function Input(props) {
+function AddProposalInput(props) {
+
+	const [textInput, setTextInput] = useState();
+
+	const addProposal = (e) => {
+		e.preventDefault();
+		props.addProposal(textInput); 
+		setTextInput("");
+	}
+
 	return (
-		<div className='Input'>
-			{props.admin.value ? <AddVoterInput
-				addVoter={props.addVoter}
-			/> : null}
-		</div>
+		<form onSubmit={addProposal}>
+			<input value={textInput} onChange={e => setTextInput(e.target.value)} type="text" />
+			<input type="submit" value="Add Proposal" />
+		</form>
 	)
+}
+
+function Input(props) {
+	if (props.status == 0 && props.admin.value) {
+		return (
+			<div className='Input'>
+				<AddVoterInput addVoter={props.addVoter} />
+			</div>
+		)
+	}
+	if (!props.accounts.isVoter)
+		return (null);
+	if (props.status == 1)
+		return (
+			<div className='Input'>
+				<AddProposalInput addProposal={props.addProposal} />
+			</div>
+		)
+	return (null);
 }
 
 export default Input;
