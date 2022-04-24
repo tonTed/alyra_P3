@@ -22,7 +22,7 @@ function Worklow(props) {
 function Address(props) {
 	return (
 		<div className="Address">
-			<p>{props.account}</p>
+			<p>{props.accounts.connected}</p>
 		</div>
 	)
 }
@@ -34,7 +34,7 @@ function Header(props) {
 				status={props.status}
 			/>
 			<Address
-				account={props.account}
+				accounts={props.accounts}
 			/>
 		</div>
 		)

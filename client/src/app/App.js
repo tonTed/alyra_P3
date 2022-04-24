@@ -9,16 +9,18 @@ import Header from "../components/header/Header";
 class App extends Component {
   state = {
     web3: null, 
-    accounts: null, 
+    accounts: { connected: null, owner: null,}, 
     contract: null,
-    status: {
-      value: null,
-      func: null
-    } 
+    status: { value: null, func: null },
+    admin:{ value: null, func: null } 
   }
 
   updateStatus = (value) => {
     this.setState({status:{value}})
+  }
+
+  updateAdmin = (value) => {
+    this.setState({admin:{value}})
   }
 
   componentDidMount = async () => {
@@ -37,12 +39,21 @@ class App extends Component {
         deployedNetwork && deployedNetwork.address,
       );
 
-      //t: Set status Worklow
+      //t: Get status Worklow
       const status = await instance.methods.workflowStatus().call();
+
+      //t: Get owner
+      const owner = await instance.methods.owner().call();
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance, status:{value: status, func: this.updateStatus}});
+      this.setState({ 
+        web3,
+        accounts: {connected: accounts[0], owner}, 
+        contract: instance, 
+        status:{value: status, func: this.updateStatus},
+        admin:{value: accounts[0] == owner, func: this.updateAdmin}
+      });
 
     } catch (error) {
       // Catch any errors for any of the above operations.
@@ -61,9 +72,10 @@ class App extends Component {
     return (
       <div className="App">
         <Header
-          account={this.state.accounts[0]}
+          accounts={this.state.accounts}
           contract={this.state.contract}
           status={this.state.status}
+          admin={this.state.admin}
         /> 
       </div>
 
