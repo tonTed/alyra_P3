@@ -63,22 +63,7 @@ class App extends Component {
 		console.log(this.state.proposals)
 	}
 
-	// getProposals = async (eventsProposals, instance) => {
-	// 	const arrayProposals = await eventsProposals.map(async (_, i) =>{
-	// 		let tmp = await instance.methods.proposalsArray(i).call();
-	// 		console.log(tmp['description']);
-	// 		return (tmp['description']);
-	// 	})
-	// 	// const proposals = arrayProposals.map((promise) => {
-	// 	// 	return({})
-	// 	// })
-	// 	console.log(arrayProposals)
-	// 	console.log(arrayProposals[0])
-	// 	// console.log(arrayProposals[0])
-	// }
-
 	getProposals = async (instance, len) => {
-		console.log(len);
 		let array = [];
 		let ret = [];
 		let tmp;
