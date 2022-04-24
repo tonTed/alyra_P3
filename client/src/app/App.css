@@ -26,13 +26,16 @@ button {
 .App div {
   display: flex;
 	flex-direction: row;
+	justify-content: center;
 	flex-wrap: nowrap;
 	align-items: center;
 	background-color: tomato;
 	border: solid;
+	padding: 10px 5vw 10px 5vw;
 }
 
 .App div div{
+	padding: 0 1vw 0 1vw;
   display: flex;
 	align-items: center;
 	height: 40px;

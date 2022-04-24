@@ -6,11 +6,12 @@ import "./App.css";
 
 import Header from "../components/header/Header";
 import Input from "../components/input/Input";
+import Message from "../components/message/Message";
 
 class App extends Component {
   state = {
     web3: null, 
-    accounts: { connected: null, owner: null, isOwner: null}, 
+    accounts: { connected: null, owner: null, isOwner: null, isVoter: null}, 
     contract: null,
     status: { value: null, func: null },
     admin: { value: null, func: null },
@@ -30,11 +31,11 @@ class App extends Component {
     console.debug(`Admin Dashbord: ${!this.state.admin.value}`);
   }
 
-  updateVoters = async () => {
-    const events = this.state.contract
-      .getPastEvents('VoterRegistered', { fromBlock: 0, toBlock: 'latest'})
-    
-    console.log(events);
+  isVoter = (address) => {
+    let ret = false;
+    this.state.voters.forEach((element) =>
+      address == element ? ret = true : null);
+    return (ret);
   }
 
   addVoter = async (address) => {
@@ -44,7 +45,8 @@ class App extends Component {
         console.log(res)
         const voters = [...this.state.voters, 
           res.events.VoterRegistered.returnValues.voterAddress];
-        console.log(voters);
+        console.debug(`Voter ${address} added`);
+        alert(`Voter ${address} added`);
       });
   }
 
@@ -73,18 +75,25 @@ class App extends Component {
       //t: Get voters
       const voters = await instance
         .getPastEvents('VoterRegistered', { fromBlock: 0, toBlock: 'latest'})
-      
       const arrayVoters = voters.map(element => element.returnValues.voterAddress);
+      this.setState({voters: arrayVoters});
+      
+      //t: Check is voter
+      const isVoter = this.isVoter(arrayVoters, accounts[0]);
+      
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
       this.setState({ 
         web3,
-        accounts: {connected: accounts[0], owner, isOwner: accounts[0] == owner}, 
+        accounts: {
+          connected: accounts[0],
+          owner: owner, 
+          isOwner: accounts[0] == owner,
+          isVoter: this.isVoter(accounts[0])}, 
         contract: instance, 
         status:{value: status, func: this.updateStatus},
         admin:{value: false, func: this.updateAdmin},
-        voters: arrayVoters
       });
 
     } catch (error) {
@@ -103,7 +112,8 @@ class App extends Component {
         accounts: { 
           connected: accounts[0],
           owner: this.state.accounts.owner,
-          isOwner: accounts == this.state.accounts.owner},
+          isOwner: accounts == this.state.accounts.owner,
+          isVoter: this.isVoter(accounts[0])},
         admin: {value: false, func: this.updateAdmin}
       });
     })
@@ -120,6 +130,9 @@ class App extends Component {
           contract={this.state.contract}
           status={this.state.status}
           admin={this.state.admin}
+        />
+        <Message
+          accounts={this.state.accounts}
         />
         <Input
           addVoter={this.addVoter}

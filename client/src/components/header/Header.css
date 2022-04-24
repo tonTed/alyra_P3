@@ -1,16 +1,13 @@
 .Header {
 	height: 80px;
-	padding: 10px 5vw 10px 5vh;
 }
 
 .Workflow {
-	padding: 0 0 0 10px;
 	max-width: 35vh;
 	min-width: 25vh;
 }
 
 .Address {
-	padding: 0 10px 0 10px;
 	margin-left: auto;
 	max-width: 45vw;
 }
