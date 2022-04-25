@@ -8,6 +8,7 @@ import Header from "../components/header/Header";
 import Input from "../components/input/Input";
 import Message from "../components/message/Message";
 import Proposals from "../components/proposals/Proposals";
+import Getters from "../components/getters/Getters";
 
 class App extends Component {
 	state = {
@@ -176,6 +177,13 @@ class App extends Component {
 					proposalAmount={this.state.proposals.length}
 					proposals={this.state.proposals}
 				/>
+				{this.state.accounts.isVoter
+				? <Getters
+					status={this.state.status.value}
+					contract={this.state.contract}
+					accounts={this.state.accounts}
+				/>
+				: null}
 				{this.state.accounts.isVoter 
 					&& this.state.status.value >= 1
 					&& this.state.status.value < 4
