@@ -25,6 +25,13 @@ module.exports = {
       })},
       network_id:42,
     },
+		fuji :{
+      provider : function() {return new HDWalletProvider({
+        mnemonic:{phrase:`${process.env.MNEMONIC}`},
+        providerOrUrl:`https://api.avax-test.network/ext/bc/C/rpc`
+      })},
+      network_id:43113,
+    },
 	},
 	mocha: {
 		reporter: 'eth-gas-reporter',
