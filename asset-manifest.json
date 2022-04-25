@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/alyra_P3/static/css/main.11999955.chunk.css",
-    "main.js": "/alyra_P3/static/js/main.c1ece2e9.chunk.js",
-    "main.js.map": "/alyra_P3/static/js/main.c1ece2e9.chunk.js.map",
+    "main.js": "/alyra_P3/static/js/main.6dbebace.chunk.js",
+    "main.js.map": "/alyra_P3/static/js/main.6dbebace.chunk.js.map",
     "runtime-main.js": "/alyra_P3/static/js/runtime-main.cfe9ebfc.js",
     "runtime-main.js.map": "/alyra_P3/static/js/runtime-main.cfe9ebfc.js.map",
-    "static/js/2.a13aa9e8.chunk.js": "/alyra_P3/static/js/2.a13aa9e8.chunk.js",
-    "static/js/2.a13aa9e8.chunk.js.map": "/alyra_P3/static/js/2.a13aa9e8.chunk.js.map",
+    "static/js/2.a9ab74e2.chunk.js": "/alyra_P3/static/js/2.a9ab74e2.chunk.js",
+    "static/js/2.a9ab74e2.chunk.js.map": "/alyra_P3/static/js/2.a9ab74e2.chunk.js.map",
     "index.html": "/alyra_P3/index.html",
-    "precache-manifest.814a371e99e3b10073ff02db66e2df2c.js": "/alyra_P3/precache-manifest.814a371e99e3b10073ff02db66e2df2c.js",
+    "precache-manifest.754b9a961579c2505f5b303993dcf990.js": "/alyra_P3/precache-manifest.754b9a961579c2505f5b303993dcf990.js",
     "service-worker.js": "/alyra_P3/service-worker.js",
     "static/css/main.11999955.chunk.css.map": "/alyra_P3/static/css/main.11999955.chunk.css.map"
   },
   "entrypoints": [
     "static/js/runtime-main.cfe9ebfc.js",
-    "static/js/2.a13aa9e8.chunk.js",
+    "static/js/2.a9ab74e2.chunk.js",
     "static/css/main.11999955.chunk.css",
-    "static/js/main.c1ece2e9.chunk.js"
+    "static/js/main.6dbebace.chunk.js"
   ]
 }
