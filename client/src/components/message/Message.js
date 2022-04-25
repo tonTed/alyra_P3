@@ -9,7 +9,7 @@ function Message(props){
 	else if (props.status == 2)
 		message = "VOTE SESSION NOT STARTED YET"
 	else if (props.status == 4)
-		message = "VOTE SESSION IS ENDED WAIT FOR VOTES TALLIER"
+		message = "VOTE SESSION IS ENDED WAIT FOR TALLY VOTE"
 	else
 		return (null);
 	return (

@@ -28,7 +28,7 @@ function Workflow(props) {
 		return (
 			<div className="Workflow">
 				<p>{`${_status}: ${status[_status].name}`}</p>
-				{props.admin.value && props.status < 5? 
+				{props.admin.value && props.status.value < 5 ? 
 					<StatusButton 
 						contract={props.contract}
 						status={props.status}

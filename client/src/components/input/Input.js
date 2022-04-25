@@ -8,6 +8,13 @@ function AddVoterInput(props) {
 
 	const addVoter = (e) => {
 		e.preventDefault();
+
+		if (!props.web3.utils.isAddress(textInput)){
+			alert('Bad address');
+			setTextInput("");
+			return;
+		}
+
 		props.addVoter(textInput);
 		setTextInput("");
 	}
@@ -63,7 +70,7 @@ function VoteProposalInput(props){
 				min={0}
 				max={props.proposalAmount - 1}
 			/>
-			<input type="submit" value="Add Proposal" />
+			<input type="submit" value="Vote Proposal id" />
 		</form>
 	)
 }
@@ -82,7 +89,7 @@ function Input(props) {
 	if (props.status == 0 && props.admin.value) {
 		return (
 			<div className='Input'>
-				<AddVoterInput addVoter={props.addVoter} />
+				<AddVoterInput addVoter={props.addVoter} web3={props.web3}/>
 			</div>
 		)
 	}

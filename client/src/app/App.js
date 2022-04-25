@@ -176,18 +176,20 @@ class App extends Component {
 					contract={this.state.contract}
 					proposalAmount={this.state.proposals.length}
 					proposals={this.state.proposals}
+					web3={this.state.web3}		
 				/>
 				{this.state.accounts.isVoter
 				? <Getters
-					proposalAmount={this.state.proposals.length}
+					proposal={this.state.proposals}
 					status={this.state.status.value}
 					contract={this.state.contract}
 					accounts={this.state.accounts}
+					web3={this.state.web3}
 				/>
 				: null}
 				{this.state.accounts.isVoter 
 					&& this.state.status.value >= 1
-					&& this.state.status.value < 4
+					&& this.state.status.value <= 4
 				? <Proposals 
 					proposals={this.state.proposals}
 				/>
