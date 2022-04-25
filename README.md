@@ -48,14 +48,14 @@
 
 ### **Notation :**
 Avoir B
-- [x]Revoir le code sol pour enlever la faille de sécurité, ajouter les commentaires et les éléments de bonnes pratiques / enlever le égal (si vous n'utilisez pas le code proposé en correction, veuillez faire attention à la
+- [x] Revoir le code sol pour enlever la faille de sécurité, ajouter les commentaires et les éléments de bonnes pratiques / enlever le égal (si vous n'utilisez pas le code proposé en correction, veuillez faire attention à la
 sécurité, aux optimisations, aux commentaires, aux bonnes pratiques...)
 - [x] avoir une application décentralisée qui permet d'appeler toutes les fonctions
-- [ ]faire une vidéo du workflow
+- [ ] faire une vidéo du workflow
 - [x] une utilisation d'event
 - [x] afficher le compte utilisé, et les proposals
 
 Avoir A
-- [x]déployer l'application sur serveur public
-- [x]un affichage adapté au compte utilisé,
-- [x]utiliser au moins un composant
+- [x] déployer l'application sur serveur public
+- [x] un affichage adapté au compte utilisé,
+- [x] utiliser au moins un composant
