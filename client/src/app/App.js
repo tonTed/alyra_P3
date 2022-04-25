@@ -179,6 +179,7 @@ class App extends Component {
 				/>
 				{this.state.accounts.isVoter
 				? <Getters
+					proposalAmount={this.state.proposals.length}
 					status={this.state.status.value}
 					contract={this.state.contract}
 					accounts={this.state.accounts}
