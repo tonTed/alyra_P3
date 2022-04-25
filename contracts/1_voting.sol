@@ -43,6 +43,11 @@ contract Voting is Ownable {
         _;
     }
 
+    modifier only100proposals() {
+        require(proposalsArray.length <= 100, "Proposals ammount is over (100 max)");
+        _;
+    }
+
     // ::::::::::::: GETTERS ::::::::::::: //
 
     function getVoter(address _addr) external view onlyVoters returns (Voter memory){
@@ -66,7 +71,7 @@ contract Voting is Ownable {
 
     // ::::::::::::: PROPOSAL ::::::::::::: //
 
-    function addProposal(string memory _desc) external onlyVoters {
+    function addProposal(string memory _desc) external onlyVoters only100proposals {
         require( workflowStatus == WorkflowStatus.ProposalsRegistrationStarted,
             "Proposals are not allowed yet"
         );
