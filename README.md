@@ -41,7 +41,7 @@
 ### **To give back :**
 
 - [Demo video of your Front features](https://www.loom.com/share/7d4739a4fa5b4a489964b3acb00f56c2)
-- [Demo video of your code](https://www.loom.com/share/489333ebb6954dd494f8140b8bbcb9b3)
+- [Demo video of your code](https://kovan.etherscan.io/address/0xE770bFe3670dcA93c155B5559D94F761ec5E462f)
 - [Link to your Github repository](https://github.com/tonTed/alyra_P3/tree/main) 
 - [The Github Pages link](https://tonted.github.io/alyra_P3/)
 - [Kovan contract](https://kovan.etherscan.io/address/0xd089edab994556409c73d94c7225533f2ce60eb5)
