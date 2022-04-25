@@ -45,6 +45,7 @@
 - [The Github Pages link](https://tonted.github.io/alyra_P3/)
 - [Kovan contract](https://kovan.etherscan.io/address/0xd089edab994556409c73d94c7225533f2ce60eb5)
 - [Ropsten contract](https://ropsten.etherscan.io/address/0xf28140450e8691ce9b90d87c183c2bf6c2c26ed6)
+- [Fuji contract](https://testnet.snowtrace.io/address/0xac66956554377EE423f0187E97AC1dAFBeB8ec2E)
 
 ### **Notation :**
 Avoir B
