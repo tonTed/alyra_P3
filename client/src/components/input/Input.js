@@ -38,7 +38,47 @@ function AddProposalInput(props) {
 	)
 }
 
+function VoteProposalInput(props){
+
+	const [textInput, setTextInput] = useState();
+
+	const voteProposal = (e) => {
+		const proposalId = textInput;
+		e.preventDefault();
+		props.contract.methods.setVote(proposalId)
+			.send({from: props.accounts.connected})
+			.then(() => {
+				alert(`you have voted for the proposal ${proposalId} (${props.proposals[proposalId]['desc']})`)
+				props.hasVotedFunc(true);
+			})
+		setTextInput("");
+	}
+
+	return (
+		<form onSubmit={voteProposal}>
+			<input 
+				value={textInput}
+				onChange={e => setTextInput(e.target.value)} 
+				type="number"
+				min={0}
+				max={props.proposalAmount - 1}
+			/>
+			<input type="submit" value="Add Proposal" />
+		</form>
+	)
+}
+
 function Input(props) {
+
+	const [hasVoted, setHasVoted] = useState(false);
+
+	const getHasVoted = async() => {
+		const voter = await props.contract.methods
+			.getVoter(props.accounts.connected)
+			.call({from: props.accounts.connected})
+		setHasVoted(voter['hasVoted']);
+	}
+
 	if (props.status == 0 && props.admin.value) {
 		return (
 			<div className='Input'>
@@ -46,12 +86,33 @@ function Input(props) {
 			</div>
 		)
 	}
-	if (!props.accounts.isVoter)
+	if (!props.accounts.isVoter || props.status >= 4)
 		return (null);
+
+	getHasVoted();
+	
 	if (props.status == 1)
 		return (
 			<div className='Input'>
 				<AddProposalInput addProposal={props.addProposal} />
+			</div>
+		)
+	if (hasVoted)
+		return (
+			<div className='Message'>
+				YOU HAVE ALREADY VOTED
+			</div>
+		)
+	if (props.status == 3 )
+		return (
+			<div className='Input'>
+				<VoteProposalInput 
+					contract={props.contract}
+					hasVotedFunc={setHasVoted}
+					proposalAmount={props.proposalAmount}
+					accounts={props.accounts}
+					proposals={props.proposals}
+				/>
 			</div>
 		)
 	return (null);

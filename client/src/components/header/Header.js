@@ -11,7 +11,6 @@ const status = [
 ]
 
 function forwardStatus(contract, _status, accounts) {
-	console.log(_status);
 	eval(status[_status.value].func).send({from: accounts.connected})
 		.then((res) => _status.func(res.events.WorkflowStatusChange.returnValues.newStatus))
 }
@@ -29,7 +28,7 @@ function Workflow(props) {
 		return (
 			<div className="Workflow">
 				<p>{`${_status}: ${status[_status].name}`}</p>
-				{props.admin.value ? 
+				{props.admin.value && props.status < 5? 
 					<StatusButton 
 						contract={props.contract}
 						status={props.status}

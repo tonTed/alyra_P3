@@ -21,7 +21,7 @@ class App extends Component {
 	}
 
 	updateStatus = (value) => {
-		this.setState({status:{value}})
+		this.setState({status:{value, func: this.updateStatus}})
 		console.debug('Status Updated')
 	}
 
@@ -60,7 +60,6 @@ class App extends Component {
 				})
 		console.debug(`Proposal ${proposal} added`);
 		alert(`Proposal ${proposal} added`);
-		console.log(this.state.proposals)
 	}
 
 	getProposals = async (instance, len) => {
@@ -173,8 +172,13 @@ class App extends Component {
 					addProposal={this.addProposal}
 					admin={this.state.admin}
 					status={this.state.status.value}
+					contract={this.state.contract}
+					proposalAmount={this.state.proposals.length}
+					proposals={this.state.proposals}
 				/>
-				{this.state.accounts.isVoter && this.state.status.value >= 1
+				{this.state.accounts.isVoter 
+					&& this.state.status.value >= 1
+					&& this.state.status.value < 4
 				? <Proposals 
 					proposals={this.state.proposals}
 				/>
