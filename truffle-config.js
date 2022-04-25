@@ -1,4 +1,6 @@
 const path = require("path");
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+require('dotenv').config();
 
 module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
@@ -10,6 +12,19 @@ module.exports = {
 			port: 8545,            // Standard Ethereum port (default: none)
 			network_id: "*",       // Any network (default: none)
 		},
+		ropsten:{
+      provider : function() {return new HDWalletProvider({
+        mnemonic:{phrase:`${process.env.MNEMONIC}`},
+        providerOrUrl:`https://ropsten.infura.io/v3/${process.env.INFURA_ID}`})},
+        network_id:3,
+    },
+    kovan:{
+      provider : function() {return new HDWalletProvider({
+        mnemonic:{phrase:`${process.env.MNEMONIC}`},
+        providerOrUrl:`https://kovan.infura.io/v3/${process.env.INFURA_ID}`
+      })},
+      network_id:42,
+    },
 	},
 	mocha: {
 		reporter: 'eth-gas-reporter',
