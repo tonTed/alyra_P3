@@ -1,22 +1,48 @@
+p {
+	width: 100%;
+	padding: 0 1vw 0 1vw;
+	text-align: center;
+}
+
+button {
+	position: absolute;
+	border-radius: 20px;
+	right: 0;
+	height: 40px;
+	width: 40%;
+	cursor: pointer;
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  justify-content: flex-start;
+  font-size: calc(10px + 1vmin);
   color: white;
 }
 
-.App-link {
-  color: #09d3ac;
+.App div {
+  display: flex;
+	flex-direction: row;
+	justify-content: center;
+	flex-wrap: nowrap;
+	align-items: center;
+	background-color: tomato;
+	border: solid;
+	padding: 10px 5vw 10px 5vw;
 }
+
+.App div div{
+	padding: 0 1vw 0 1vw;
+  display: flex;
+	align-items: center;
+	height: 40px;
+	border-radius: 20px;
+	background-color: brown;
+  border: solid;
+	overflow: hidden;
+	position: relative;
+	border: solid;
+}
+

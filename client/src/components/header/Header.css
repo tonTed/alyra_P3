@@ -1,0 +1,14 @@
+.Header {
+	height: 80px;
+}
+
+.Workflow {
+	max-width: 35vh;
+	min-width: 25vh;
+}
+
+.Address {
+	margin-left: auto;
+	max-width: 45vw;
+}
+
